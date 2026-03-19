@@ -104,9 +104,15 @@ class FloatingViewService : Service() {
         Handler(Looper.getMainLooper()).post(object : Runnable {
             override fun run() {
 
-                val allText = FloatingDataHolder.messages.joinToString("\n\n")
+                val formattedText = StringBuilder()
 
-                textView?.text = allText
+                FloatingDataHolder.messages.forEach { msg ->
+                    formattedText.append("━━━━━━━━━━━━━━\n")
+                    formattedText.append(msg)
+                    formattedText.append("\n\n")
+                }
+
+                textView?.text = formattedText.toString()
 
                 scrollView?.post {
                     scrollView.fullScroll(View.FOCUS_DOWN)
